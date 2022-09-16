@@ -11,9 +11,6 @@ def split_odd_even(nums: List[int]) -> Tuple[List[int], List[int]]:
     odd_nums = []
     even_nums = []
     for num in nums:
-        if num == 0:
-            # 0 is not odd or even
-            continue
         if num % 2 == 0:
             # if num is even add it to list of evens
             even_nums.append(num)
