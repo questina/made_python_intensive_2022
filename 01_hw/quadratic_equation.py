@@ -1,8 +1,8 @@
-from typing import List, Union
+from typing import Union, Tuple
 from math import sqrt
 
 
-def solve_quad_eq(a: float, b: float, c: float) -> Union[List[float], None]:
+def solve_quad_eq(a: float, b: float, c: float) -> Union[None, Tuple[float], Tuple[float, float]]:
     """
     This function finds real roots for quadratic equation ax^2 + bx + c = 0 by discriminant
     :param a: coefficient of equation, called the quadratic coefficient (a != 0);
@@ -18,11 +18,10 @@ def solve_quad_eq(a: float, b: float, c: float) -> Union[List[float], None]:
     d = b ** 2 - 4 * a * c
     if d == 0:
         # if discriminant equals to zero when where is only one real root
-        return [-b / (2 * a)]
+        return -b / (2 * a),
     elif d > 0:
         # if discriminant greater than zero when where is two real roots
-        return [(-b - sqrt(d)) / (2 * a), (-b + sqrt(d)) / (2 * a)]
+        return (-b - sqrt(d)) / (2 * a), (-b + sqrt(d)) / (2 * a)
     else:
         # if discriminant less than zero when where is no real roots
         return None
-

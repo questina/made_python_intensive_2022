@@ -6,7 +6,8 @@ def test_quad_eq():
     eps = 0.0000001
     assert solve_quad_eq(0, 0, 0) is None
     assert solve_quad_eq(0, 100, 101) is None
-    assert solve_quad_eq(1, -5, 4) == [1, 4] or solve_quad_eq(1, -5, 4) == [4, 1]
+    # using sets to compare results because the order of the roots may be different in different implementations
+    assert len(solve_quad_eq(1, -5, 4)) == 2 and set(solve_quad_eq(1, -5, 4)) == {1, 4}
 
     assert solve_quad_eq(9 / 5, 6, 5) is not None \
            and len(solve_quad_eq(9 / 5, 6, 5)) == 1 \
@@ -14,13 +15,11 @@ def test_quad_eq():
 
     assert solve_quad_eq(1, -1 / 2, -3) is not None \
            and len(solve_quad_eq(1, -1 / 2, -3)) == 2 \
-           and ((solve_quad_eq(1, -1 / 2, -3)[0] == 2 and abs(-1.5 - solve_quad_eq(1, -1 / 2, -3)[1]) < eps)
-                or
-                (solve_quad_eq(1, -1 / 2, -3)[1] == 2 and abs(-1.5 - solve_quad_eq(1, -1 / 2, -3)[0]) < eps))
+           and (solve_quad_eq(1, -1 / 2, -3)[1] == 2 and abs(-1.5 - solve_quad_eq(1, -1 / 2, -3)[0]) < eps)
 
     assert solve_quad_eq(1, 0, 4) is None
-    assert solve_quad_eq(1, 0, -4) == [-2, 2] or solve_quad_eq(1, 0, -4) == [2, -2]
-    assert solve_quad_eq(1, 1, 0) == [-1, 0] or solve_quad_eq(1, 1, 0) == [0, -1]
+    assert len(solve_quad_eq(1, 0, -4)) == 2 and set(solve_quad_eq(1, 0, -4)) == {-2, 2}
+    assert len(solve_quad_eq(1, 1, 0)) == 2 and set(solve_quad_eq(1, 1, 0)) == {-1, 0}
 
     assert solve_quad_eq(13, 0, 0) is not None \
            and len(solve_quad_eq(13, 0, 0)) == 1 \
