@@ -1,5 +1,5 @@
 from typing import Union, Tuple
-from math import sqrt
+from math import sqrt, isclose
 
 
 def solve_quad_eq(a: float, b: float, c: float) -> Union[None, Tuple[float], Tuple[float, float]]:
@@ -16,7 +16,7 @@ def solve_quad_eq(a: float, b: float, c: float) -> Union[None, Tuple[float], Tup
         return None
     # count discriminant of quadratic equation
     d = b ** 2 - 4 * a * c
-    if d == 0:
+    if isclose(d, 0):
         # if discriminant equals to zero when where is only one real root
         return -b / (2 * a),
     elif d > 0:
