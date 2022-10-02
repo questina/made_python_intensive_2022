@@ -1,4 +1,3 @@
-import random
 import time
 
 
@@ -10,9 +9,9 @@ def mean(k: int):
     def decorator(func):
         exec_time = []
 
-        def cnt_calls(*args):
+        def cnt_calls(*args, **kwargs):
             start = time.time()
-            func(*args)
+            func(*args, **kwargs)
             end = time.time()
 
             if len(exec_time) > k - 1:
@@ -23,13 +22,3 @@ def mean(k: int):
         return cnt_calls
 
     return decorator
-
-
-@mean(10)
-def some_func(a, b):
-    sleep_time = random.randint(a, b)
-    time.sleep(sleep_time)
-
-
-for _ in range(10):
-    some_func(1, 4)

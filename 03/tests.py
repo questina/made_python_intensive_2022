@@ -1,4 +1,7 @@
+import random
+import time
 from unpack_json import parse_json
+from avg_time import mean
 
 
 def run_test_unpack_json():
@@ -59,7 +62,13 @@ def run_test_unpack_json():
 
 
 def run_test_avg_time():
-    pass
+    @mean(3)
+    def some_func(a, b):
+        sleep_time = random.randint(a, b)
+        time.sleep(sleep_time)
+
+    for _ in range(5):
+        some_func(1, 4)
 
 
 def run_tests():
