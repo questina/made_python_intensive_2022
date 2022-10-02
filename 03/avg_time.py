@@ -2,7 +2,11 @@ import random
 import time
 
 
-def mean(k):
+def mean(k: int):
+    """
+    Decorator that measures average function execution time from last k calls
+    :param k: number of last calls to measure average time execution
+    """
     def decorator(func):
         exec_time = []
 
