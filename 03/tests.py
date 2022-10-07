@@ -66,9 +66,10 @@ def run_test_avg_time():
     def some_func(a, b):
         sleep_time = random.randint(a, b)
         time.sleep(sleep_time)
+        return a + b
 
     for _ in range(5):
-        some_func(1, 4)
+        assert 1 + 4 == some_func(1, 4)
 
 
 def run_tests():

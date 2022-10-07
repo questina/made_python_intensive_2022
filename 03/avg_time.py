@@ -11,13 +11,15 @@ def mean(k: int):
 
         def cnt_calls(*args, **kwargs):
             start = time.time()
-            func(*args, **kwargs)
+            res = func(*args, **kwargs)
             end = time.time()
 
             if len(exec_time) > k - 1:
                 exec_time.pop(0)
             exec_time.append(end - start)
             print(sum(exec_time) / len(exec_time))
+
+            return res
 
         return cnt_calls
 
