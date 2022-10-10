@@ -47,19 +47,19 @@ class CustomList(list):
         return " ".join(str(elem) for elem in self) + " " + str(sum(self))
 
     def __le__(self, other):
-        return sum(self).__le__(sum(other))
+        return sum(self) <= sum(other)
 
     def __lt__(self, other):
-        return sum(self).__lt__(sum(other))
+        return sum(self) < sum(other)
 
     def __eq__(self, other):
-        return sum(self).__eq__(sum(other))
+        return sum(self) == sum(other)
 
     def __ne__(self, other):
-        return sum(self).__ne__(sum(other))
+        return sum(self) != sum(other)
 
     def __gt__(self, other):
-        return sum(self).__gt__(sum(other))
+        return sum(self) > sum(other)
 
     def __ge__(self, other):
-        return sum(self).__ge__(sum(other))
+        return sum(self) >= sum(other)
