@@ -13,7 +13,6 @@ class LRUCache:
         self.limit = limit
         self.recent_elem = None
         self.last_elem = None
-        pass
 
     def get(self, key):
         if key in self.cache_dict:
@@ -21,7 +20,8 @@ class LRUCache:
             if len(self.cache_dict) == 1:
                 return self.cache_dict[key].val
             if cache_node.key == self.last_elem.key:
-                self.last_elem.next.prev, self.last_elem = None, self.last_elem.next
+                self.last_elem.next.prev = None
+                self.last_elem = self.last_elem.next
             elif cache_node.key == self.recent_elem.key:
                 return self.cache_dict[key].val
             else:
@@ -32,8 +32,6 @@ class LRUCache:
             self.recent_elem = cache_node
             cache_node.next = None
             return self.cache_dict[key].val
-        else:
-            return None
 
     def set(self, key, value):
         new_node = CacheNode(key, value)
