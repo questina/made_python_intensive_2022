@@ -37,3 +37,15 @@ class TestLRUCache(unittest.TestCase):
         cache.set("k_2", "val_2")
         assert cache.get("k_1") is None
         assert cache.get("k_2") == "val_2"
+
+    def test_change_existing_key(self):
+        cache = LRUCache(10)
+        cache.set("k_1", "val_1")
+        cache.set("k_1", "val_2")
+        assert cache.get("k_1") == "val_2"
+        cache.set("k_2", "val_2")
+        cache.set("k_3", "val_3")
+        cache.set("k_1", "val_4")
+        assert cache.get("k_2") == "val_2"
+        assert cache.get("k_3") == "val_3"
+        assert cache.get("k_1") == "val_4"
