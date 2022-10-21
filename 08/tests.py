@@ -15,8 +15,8 @@ class TestAnagrams(unittest.TestCase):
         assert not find_anagrams("aaaaaa", "aaaaaaaaaaaa")
 
     def test_correct_anagrams(self):
-        assert not find_anagrams("abcba", "abc")
-        assert not find_anagrams("aaa", "a")
-        assert not find_anagrams("abc cba xabcd", "abc")
-        assert not find_anagrams("aaaaaaaaa", "a")
-        assert not find_anagrams("aaaaaaaaa", "aa")
+        assert find_anagrams("abcba", "abc") == [0, 2]
+        assert find_anagrams("aaa", "a") == [0, 1, 2]
+        assert find_anagrams("abc cba xabcd", "abc") == [0, 4, 9]
+        assert find_anagrams("aaaaaaaaa", "a") == [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        assert find_anagrams("aaaaaaaaa", "aa") == [0, 1, 2, 3, 4, 5, 6, 7]
