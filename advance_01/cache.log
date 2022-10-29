@@ -1,0 +1,29 @@
+10/29/2022 08:53:47 PM:INFO:main:  LRUCache program has started
+10/29/2022 08:53:47 PM:ERROR:__init__:  Incorrect LRU cache size = -1
+10/29/2022 08:53:47 PM:DEBUG:__init__:  Initialize LRU Cache with size = 2
+10/29/2022 08:53:47 PM:INFO:set:  Method 'set' called with key = k1 and value = val1
+10/29/2022 08:53:47 PM:DEBUG:__init__:  Initialize new cache element with key = k1 and value = val1
+10/29/2022 08:53:47 PM:INFO:set:  Method 'set' called with key = k2 and value = val2
+10/29/2022 08:53:47 PM:DEBUG:__init__:  Initialize new cache element with key = k2 and value = val2
+10/29/2022 08:53:47 PM:INFO:get:  Method 'get' called with key = k3
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k3 was not found in LRU cache. Done nothing
+10/29/2022 08:53:47 PM:INFO:get:  Method 'get' called with key = k2
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k2 was found in LRU cache. Refreshing its position in cache
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k2 is the most recent element in LRU cache. Doing nothing with it
+10/29/2022 08:53:47 PM:INFO:get:  Method 'get' called with key = k1
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k1 was found in LRU cache. Refreshing its position in cache
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k1 was last element in LRU cache
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k1 is found and refreshed in LRU cache
+10/29/2022 08:53:47 PM:INFO:set:  Method 'set' called with key = k3 and value = val3
+10/29/2022 08:53:47 PM:DEBUG:__init__:  Initialize new cache element with key = k3 and value = val3
+10/29/2022 08:53:47 PM:DEBUG:set:  LRU cache is full, deleting last element with key = k2 and value = val2
+10/29/2022 08:53:47 PM:INFO:get:  Method 'get' called with key = k3
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k3 was found in LRU cache. Refreshing its position in cache
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k3 is the most recent element in LRU cache. Doing nothing with it
+10/29/2022 08:53:47 PM:INFO:get:  Method 'get' called with key = k2
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k2 was not found in LRU cache. Done nothing
+10/29/2022 08:53:47 PM:INFO:get:  Method 'get' called with key = k1
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k1 was found in LRU cache. Refreshing its position in cache
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k1 was last element in LRU cache
+10/29/2022 08:53:47 PM:DEBUG:get:  key = k1 is found and refreshed in LRU cache
+10/29/2022 08:53:47 PM:INFO:main:  LRUCache program has ended
