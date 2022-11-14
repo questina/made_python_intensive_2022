@@ -12,19 +12,21 @@ class Client:
         self.socket = socket.socket()
         self.queue = queue.Queue()
         self.sem = threading.Semaphore(1)
-        self.threads = [Thread(target=self.send_url, args=(self.queue, self.sem)) for _ in range(workers_num)]
+        self.threads = [Thread(target=self.send_url,
+                               args=(self.queue, self.sem))
+                        for _ in range(workers_num)]
 
     def connect(self, url_file):
         self.socket.connect(("localhost", 5001))
-        with open(url_file, "r") as f:
-            urls = f.readlines()
+        with open(url_file, "r") as url_f:
+            urls = url_f.readlines()
         for url in urls:
             self.queue.put(url.replace('\n', ''))
         self.queue.put(None)
-        for th in self.threads:
-            th.start()
-        for th in self.threads:
-            th.join()
+        for thread in self.threads:
+            thread.start()
+        for thread in self.threads:
+            thread.join()
         self.socket.close()
 
     def send_url(self, que, sem):

@@ -18,18 +18,20 @@ class Server:
         self.workers_num = workers_num
         self.queue = queue.Queue()
         self.sem = threading.Semaphore(1)
-        self.threads = [Thread(target=self.cnt_freq, args=(self.queue, self.sem)) for _ in range(self.workers_num)]
+        self.threads = [Thread(target=self.cnt_freq,
+                               args=(self.queue, self.sem))
+                        for _ in range(self.workers_num)]
         self.url_num = 0
 
     def run(self):
         try:
             self.socket.listen()
             while True:
-                conn, addr = self.socket.accept()
+                conn, _ = self.socket.accept()
                 self.conn = conn
                 with conn:
-                    for th in self.threads:
-                        th.start()
+                    for thread in self.threads:
+                        thread.start()
                     cur_url = self.recv_msg(conn)
                     while cur_url:
                         cur_url = cur_url.decode('unicode_escape')
@@ -37,8 +39,8 @@ class Server:
                         cur_url = self.recv_msg(conn)
                 self.conn = None
                 self.queue.put(None)
-                for th in self.threads:
-                    th.join()
+                for thread in self.threads:
+                    thread.join()
         except socket.timeout:
             self.socket.close()
 
@@ -53,21 +55,22 @@ class Server:
                 que.put(None)
                 break
 
-            data = urlopen(url).read()
+            with urlopen(url) as url_f:
+                data = url_f.read()
             soup = BeautifulSoup(data)
             data = soup.get_text()
             words = data.split()
             word_freq = {}
             for word in words:
                 word_freq[word] = word_freq.get(word, 0) + 1
-            word_freq = sorted(word_freq.items(), key=lambda item: item[1], reverse=True)
+            word_freq = sorted(word_freq.items(), key=lambda item: item[1],
+                               reverse=True)
             top_k_words = {word: freq for word, freq in word_freq[:self.k]}
             msg = (url + " " + str(top_k_words)).encode('unicode_escape')
 
             with sem:
                 if self.conn:
-                    msg = struct.pack('>L', len(msg)) + msg
-                    self.conn.send(msg)
+                    self.send_msg(self.conn, msg)
                 else:
                     print("Connection was closed")
                     break
@@ -78,8 +81,7 @@ class Server:
         if sock:
             msg = struct.pack('>L', len(msg)) + msg
             sock.send(msg)
-        else:
-            print("Connection was closed")
+        print("Connection was closed")
 
     def recv_msg(self, sock):
         if sock:
@@ -89,8 +91,7 @@ class Server:
             msglen = struct.unpack('>L', raw_msglen)[0]
             msg = sock.recv(msglen)
             return msg
-        else:
-            print("Connection was closed")
+        print("Connection was closed")
 
 
 parser = argparse.ArgumentParser()
